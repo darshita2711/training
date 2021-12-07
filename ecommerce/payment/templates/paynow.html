@@ -1,0 +1,78 @@
+{% extends "base.html"%}
+{% load rest_framework %}
+{% load static%}
+{% block content %}
+<body class="page-template belle">
+    <div class="pageWrapper">
+        <!--Search Form Drawer-->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="#">
+                    <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                    <input class="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="icon anm anm-times-l"></i></button>
+            </div>
+        </div> 
+        <!--Body Content-->
+        <div id="page-content">
+            <!--Page Title-->
+            <div class="page section-header text-center">
+                <div class="page-title">
+                    <div class="wrapper"><h1 class="page-width">Payment</h1></div>
+                  </div>
+            </div>
+            <!--End Page Title-->
+            
+            <div class="container">
+                <div class="row billing-fields" style="width: 100%; margin-left: 300px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="your-order-payment">
+                            <div class="your-payment">
+                                <h2 class="payment-title mb-3">Check Your Details</h2>
+                                <div class="payment-method">
+                                    <div class="payment-accordion">
+                                        <div class="card mb-2">
+                                                <div class="card-header">
+                                                    <h1> Payment Information </h1>
+                                                </div>
+                                                   
+                                                    <div class="card-body">
+                                                        <form method="POST" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                        <fieldset>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-cardname">Your total Payment</label>
+                                                                    <input readonly name="name" value="{{data.price}}" placeholder="" id="input-cardname" class="form-control" type="number">
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <div class="order-button-payment">
+                                                            <button class="btn" value="Place order" type="submit">Order Now</button>
+                                                        </div>
+                                                    </form>
+
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                   
+                                </div>
+                            </div>
+                            
+                            <hr />
+                        </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </body>
+    {% endblock %}
+    

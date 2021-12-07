@@ -1,0 +1,60 @@
+{% extends "base.html"%}
+{% load rest_framework %}
+{% load render_table from django_tables2 %}
+{% load static%}
+{% block content %}
+<body class="page-template belle">
+    <div class="pageWrapper">
+        <!--Search Form Drawer-->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="#">
+                    <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                    <input class="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="icon anm anm-times-l"></i></button>
+            </div>
+        </div> 
+        <!--Body Content-->
+        <div id="page-content">
+            <!--Page Title-->
+            <div class="page section-header text-center">
+                <div class="page-title">
+                    <div class="wrapper"><h1 class="page-width">Checkout</h1></div>
+                  </div>
+            </div>
+            <!--End Page Title-->
+            
+            <div class="container" style="width: 100%; margin-left: 300px;">
+                <div class="row billing-fields">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                        <div class="create-ac-content bg-light-gray padding-20px-all">
+                            <form method="POST"  enctype="multipart/form-data">
+                                {% csrf_token%}
+                                {% if messages %}
+                                <div class="alert alert-success">
+                                    {% for message in messages %}
+                                        <a>{{ message }}</a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            <table class="table table-centered datatable dt-responsive nowrap table-card-list"
+                                style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
+                                <tbody>
+                                    {% render_table table_data %}
+                            
+                                </tbody>
+                            </table>
+                                <button class="button button1" type="submit">Save</button>   
+                            </form>
+                            <!-- <a href="{% url 'editdata' pk=user.id%}"><button class="button button1" type="submit">Update</button> </a>  -->
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </body>
+    {% endblock %}

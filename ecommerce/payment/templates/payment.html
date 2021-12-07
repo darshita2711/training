@@ -1,0 +1,114 @@
+{% extends "base.html"%}
+{% load rest_framework %}
+{% load static%}
+{% block content %}
+<body class="page-template belle">
+    <div class="pageWrapper">
+        <!--Search Form Drawer-->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="#">
+                    <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                    <input class="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="icon anm anm-times-l"></i></button>
+            </div>
+        </div> 
+        <!--Body Content-->
+        <div id="page-content">
+            <!--Page Title-->
+            <div class="page section-header text-center">
+                <div class="page-title">
+                    <div class="wrapper"><h1 class="page-width">Checkout</h1></div>
+                  </div>
+            </div>
+            <!--End Page Title-->
+            
+            <div class="container">
+                <div class="row billing-fields" style="width: 100%; margin-left: 300px;">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="your-order-payment">
+                            <div class="your-payment">
+                                <h2 class="payment-title mb-3">payment method</h2>
+                                <div class="payment-method">
+                                    <div class="payment-accordion">
+                                        <div class="card mb-2">
+                                                <div class="card-header">
+                                                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour"> Payment Information </a>
+                                                </div>
+                                                <form method="POST"  action="{% url 'paynow'%}"enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    {% if messages %}
+                                                        <div class="alert alert-success">
+                                                            {% for message in messages %}
+                                                                <a>{{ message }}</a>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endif %}            
+                                                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <fieldset>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-cardname">Name on Card <span class="required-f">*</span></label>
+                                                                    <input readonly name="name" value="{{name}}" placeholder="Card Name" id="input-cardname" class="form-control" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-country">Credit Card Type <span class="required-f">*</span></label>
+                                                                    <select name="country_id" class="form-control">
+                                                                        <option value=""> --- Please Select --- </option>
+                                                                        <option value="1">American Express</option>
+                                                                        <option value="2">Visa Card</option>
+                                                                        <option value="3">Master Card</option>
+                                                                        <option value="4">Discover Card</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-cardno">Credit Card Number  <span class="required-f">*</span></label>
+                                                                    <input name="cardno" value="" placeholder="Credit Card Number" id="input-cardno" class="form-control" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-cvv">CVV Code <span class="required-f">*</span></label>
+                                                                    <input name="cvv" value="" placeholder="Card Verification Number" id="input-cvv" class="form-control" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label>Expiration Date <span class="required-f">*</span></label>
+                                                                    <input type="date" name="exdate" class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <img class="padding-25px-top xs-padding-5px-top" src="{% static 'assets/images/payment-img.jpg'%}" alt="card" title="card" />
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+    
+                                                    </div>
+                                                </div>
+                                                <div class="order-button-payment">
+                                                    <button class="btn" value="Place order" type="submit">Payment Now</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                   
+                                </div>
+                            </div>
+                            
+                            <hr />
+                        </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </body>
+    {% endblock %}
+    
